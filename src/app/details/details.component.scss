@@ -1,0 +1,59 @@
+$listing-photo-height: 600px;
+$listing-photo-width: 50%;
+$listing-heading-font-size: 48pt;
+$listing-location-font-size: 24pt;
+$listing-features-font-size: 24pt;
+$listing-features-li-font-size: 14pt;
+$listing-apply-section-heading-font-size: 18pt;
+$margin-bottom: 15px;
+
+.listing-photo {
+  height: $listing-photo-height;
+  width: $listing-photo-width;
+  object-fit: cover;
+  border-radius: 30px;
+  float: right;
+}
+
+.listing-heading {
+  font-size: $listing-heading-font-size;
+  font-weight: bold;
+  margin-bottom: $margin-bottom;
+}
+
+.listing-location {
+  &::before {
+    content: url('/assets/location-pin.svg') / '';
+  }
+  font-size: $listing-location-font-size;
+  margin-bottom: $margin-bottom;
+}
+
+.listing-features {
+  margin-bottom: 20px;
+
+  & > .section-heading {
+    color: var(--secondary-color);
+    font-size: $listing-features-font-size;
+    margin-bottom: $margin-bottom;
+  }
+
+  li {
+    font-size: $listing-features-li-font-size;
+  }
+}
+
+li {
+  list-style-type: none;
+}
+
+.listing-apply {
+  .section-heading {
+    font-size: $listing-apply-section-heading-font-size;
+    margin-bottom: $margin-bottom;
+  }
+}
+
+label, input {
+  display: block;
+}

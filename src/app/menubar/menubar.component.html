@@ -1,0 +1,13 @@
+<div class="card">
+    <p-menubar [model]="items">
+        <ng-template pTemplate="start">
+            <img src="/assets/logo.png" height="40" class="mr-2" />
+        </ng-template>
+    </p-menubar>
+    <p-overlay [visible]="(cartService.overlayVisible$ | async)!"
+        [responsive]="{ breakpoint: '640px', direction: 'bottom', contentStyleClass: 'h-20rem' }"
+        contentStyleClass="p-4 surface-overlay shadow-2 border-round">
+        <app-minicart [products]="quoteProducts"></app-minicart>
+    </p-overlay>
+</div>
+<p-messages [value]="(cartService.messages | async) || []" [enableService]="false" [closable]="true"></p-messages>

@@ -1,0 +1,14 @@
+<p-orderList [value]="products" [listStyle]="{ height: '25rem' }" header="Shopping Cart">
+    <ng-template let-productQuote pTemplate="item">
+        <div class="flex flex-wrap p-2 align-items-center gap-3">
+            <img [src]="'assets/products/' + productQuote.product.image" [alt]="productQuote.product.name"
+                class="w-4rem shadow-2 flex-shrink-0 border-round" />
+            <div class="flex-1 flex flex-column gap-2">
+                <span class="font-bold">{{ productQuote.product.name }}</span>
+            </div>
+            <span class="font-bold text-900">{{ '$' + productQuote.product.price }}</span>
+            <span class="font-bold text-900">{{ 'x' + productQuote.quantity }}</span>
+        </div>
+    </ng-template>
+</p-orderList>
+<p-button label="Place order" icon="pi pi-shopping-cart" (click)="this.placeOrder(this.customerId)" class="p-button-rounded" styleClass="mt-2"></p-button>
