@@ -1,48 +1,48 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  url = 'http://localhost:3000/';
+  url = 'http://localhost:3000/'
 
-  constructor() {}
+  constructor () {}
 
-  async *streamOrders(customerId: number): AsyncGenerator<string, void, undefined> {
-    const fetchUrl = `${this.url}place`;
+  async * streamOrders (customerId: number): AsyncGenerator<string, void, undefined> {
+    const fetchUrl = `${this.url}place`
     const fetchOptions: RequestInit = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ customerId })
-    };
+    }
 
-    let response;
+    let response
     try {
-      response = await fetch(fetchUrl, fetchOptions);
+      response = await fetch(fetchUrl, fetchOptions)
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        throw new Error(`HTTP error! Status: ${response.status}`)
       }
     } catch (error) {
-      console.error("Fetch call failed:", error);
-      return;
+      console.error('Fetch call failed:', error)
+      return
     }
 
-    if (!response.body) {
-      console.error("ReadableStream not available in the response body.");
-      return;
+    if (response.body == null) {
+      console.error('ReadableStream not available in the response body.')
+      return
     }
 
-    const reader = response.body.getReader();
+    const reader = response.body.getReader()
     try {
       while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        yield new TextDecoder().decode(value);
+        const { done, value } = await reader.read()
+        if (done) break
+        yield new TextDecoder().decode(value)
       }
     } catch (error) {
-      console.error("Error reading from the stream:", error);
+      console.error('Error reading from the stream:', error)
     } finally {
-      reader.releaseLock();
+      reader.releaseLock()
     }
   }
 }
