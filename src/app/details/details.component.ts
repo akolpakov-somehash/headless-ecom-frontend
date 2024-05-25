@@ -22,12 +22,16 @@ export class DetailsComponent {
 
   constructor () {
     const productId = parseInt(this.route.snapshot.params['id'], 10)
-    this.productService.getProductById(productId).then(productTile => {
-      this.productTile = productTile
-    })
+    this.productService.getProductById(productId)
+      .then(productTile => {
+        this.productTile = productTile
+      })
+      .catch(error => {
+        console.error(error)
+      })
   }
 
-  addToCart (productTile: ProductTile) {
+  addToCart (productTile: ProductTile): void {
     // this.productService.addToCart(this.productTile);
   }
 }

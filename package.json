@@ -9,6 +9,13 @@
     "test": "ng test",
     "serve:ssr:front-view": "node dist/front-view/server/server.mjs"
   },
+  "ts-standard": {
+    "ignore": [
+      "dist",
+      "server.ts",
+      "eslint.config.mjs"
+    ]
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^17.3.9",

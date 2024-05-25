@@ -16,20 +16,18 @@ export class CartService {
   // Observable message stream
   public messages = this._messages.asObservable()
 
-  constructor () {}
-
   // Method to toggle visibility based on current state
-  toggleOverlay () {
+  toggleOverlay (): void {
     this.overlayVisible.next(!this.overlayVisible.value)
   }
 
   // Method to set specific visibility state
-  setOverlayVisible (visible: boolean) {
+  setOverlayVisible (visible: boolean): void {
     this.overlayVisible.next(visible !== null ? visible : false)
   }
 
   // Method to set messages
-  addMessage (message: Message) {
+  addMessage (message: Message): void {
     const currentMessages = this._messages.getValue()
     this._messages.next([...currentMessages, message])
   }

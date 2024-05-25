@@ -42,6 +42,4 @@ export class QuoteService {
       return { customerid: 0, itemsList: [] } // Return an empty quote on error
     }
   }
-
-  constructor () { }
 }

@@ -32,14 +32,15 @@ export class MinicartComponent {
     3: 'success' // Success
   }
 
-  async placeOrder (customerId: number) {
+  async placeOrder (customerId: number): Promise<void> {
     this.cartService.setOverlayVisible(false)
     try {
       for await (const chunk of this.orderService.streamOrders(this.customerId)) {
         if (!this.alive) break
         const chunkData = JSON.parse(chunk)
-        const severity = this.statusToSeverity[chunkData.status as keyof typeof this.statusToSeverity] || 'info'
-        this.cartService.addMessage({ severity, summary: 'Order Update', detail: chunkData.message })
+        const severity = this.statusToSeverity[chunkData.status as keyof typeof this.statusToSeverity]
+        const finalSeverity = severity.length > 0 ? 'info' : severity
+        this.cartService.addMessage({ severity: finalSeverity, summary: 'Order Update', detail: chunkData.message })
         console.log(chunk)
       }
     } catch (error: unknown) {
@@ -61,7 +62,7 @@ export class MinicartComponent {
     }
   }
 
-  ngOnDestroy () {
+  ngOnDestroy (): void {
     this.alive = false
   }
 }

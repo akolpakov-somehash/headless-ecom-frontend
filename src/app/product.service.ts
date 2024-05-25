@@ -27,6 +27,4 @@ export class ProductService {
     const data = await fetch(`${this.url}/${id}`)
     return await data.json() ?? {}
   }
-
-  constructor () { }
 }

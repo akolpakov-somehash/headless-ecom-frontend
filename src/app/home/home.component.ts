@@ -27,15 +27,18 @@ export class HomeComponent {
   quoteService: QuoteService = inject(QuoteService)
 
   constructor () {
-    this.productService.getAllProducts().then((productTileList: ProductTile[]) => {
-      this.productTileList = productTileList
-      this.filteredTileList = productTileList
-    })
+    this.productService.getAllProducts()
+      .then((productTileList: ProductTile[]) => {
+        this.productTileList = productTileList
+        this.filteredTileList = productTileList
+      })
+      .catch((error) => {
+        console.error('Error fetching products:', error)
+      })
   }
 
-  filterResults (text: string) {
-    if (!text) {
-      this.filteredTileList = this.filteredTileList
+  filterResults (text: string): void {
+    if (text.length === 0) {
       return
     }
 
@@ -44,8 +47,7 @@ export class HomeComponent {
     )
   }
 
-  async addProduct (id: number, qty: number) {
-    const quote = await this.quoteService.addProduct(id, qty)
-    console.log('Quote:', quote)
+  async addProduct (id: number, qty: number): Promise<void> {
+    await this.quoteService.addProduct(id, qty)
   }
 }

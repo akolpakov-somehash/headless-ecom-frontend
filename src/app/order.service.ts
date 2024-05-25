@@ -6,8 +6,6 @@ import { Injectable } from '@angular/core'
 export class OrderService {
   url = 'http://localhost:3000/'
 
-  constructor () {}
-
   async * streamOrders (customerId: number): AsyncGenerator<string, void, undefined> {
     const fetchUrl = `${this.url}place`
     const fetchOptions: RequestInit = {
