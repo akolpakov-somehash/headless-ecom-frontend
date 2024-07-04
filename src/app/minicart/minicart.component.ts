@@ -1,11 +1,10 @@
-import { Component, Input, inject } from '@angular/core';
-import { OrderListModule } from 'primeng/orderlist';
-import { DialogModule } from 'primeng/dialog';
-import { ProductQuote } from '../product-tile';
-import { ButtonModule } from 'primeng/button';
-import { OrderService } from '../order.service';
-import { CartService } from '../cart.service';
-
+import { Component, Input, inject } from '@angular/core'
+import { OrderListModule } from 'primeng/orderlist'
+import { DialogModule } from 'primeng/dialog'
+import { ProductQuote } from '../product-tile'
+import { ButtonModule } from 'primeng/button'
+import { OrderService } from '../order.service'
+import { CartService } from '../cart.service'
 
 @Component({
   selector: 'app-minicart',
@@ -13,57 +12,56 @@ import { CartService } from '../cart.service';
   imports: [
     OrderListModule,
     DialogModule,
-    ButtonModule,
+    ButtonModule
   ],
-  templateUrl: './minicart.component.html',
-  styleUrl: './minicart.component.scss'
+  templateUrl: './minicart.component.html'
 })
 export class MinicartComponent {
-  @Input() products!: ProductQuote[];
-  private alive = true;
-  cartService: CartService = inject(CartService);
-  orderService: OrderService = inject(OrderService);
+  @Input() products!: ProductQuote[]
+  private alive = true
+  cartService: CartService = inject(CartService)
+  orderService: OrderService = inject(OrderService)
 
-  customerId: number = -1;
+  customerId: number = -1
 
   readonly statusToSeverity = {
     0: 'error', // Error
-    1: 'info',  // Info
-    2: 'info',  // Info
+    1: 'info', // Info
+    2: 'info', // Info
     3: 'success' // Success
-  };
+  }
 
-  async placeOrder(customerId: number) {
-    this.cartService.setOverlayVisible(false);
+  async placeOrder (customerId: number): Promise<void> {
+    this.cartService.setOverlayVisible(false)
     try {
-      for await (let chunk of this.orderService.streamOrders(this.customerId)) {
-        if (!this.alive) break;
-        const chunkData = JSON.parse(chunk);
-        const severity = this.statusToSeverity[chunkData.status as keyof typeof this.statusToSeverity] || 'info';
-        this.cartService.addMessage({ severity: severity, summary: 'Order Update', detail: chunkData.message });
-        console.log(chunk);
+      for await (const chunk of this.orderService.streamOrders(this.customerId)) {
+        if (!this.alive) break
+        const chunkData = JSON.parse(chunk)
+        const severity = this.statusToSeverity[chunkData.status as keyof typeof this.statusToSeverity]
+        const finalSeverity = severity.length > 0 ? 'info' : severity
+        this.cartService.addMessage({ severity: finalSeverity, summary: 'Order Update', detail: chunkData.message })
+        console.log(chunk)
       }
     } catch (error: unknown) {
-      console.error("Failed to parse chunk or update order:", error);
+      console.error('Failed to parse chunk or update order:', error)
 
-      let errorMessage = 'Failed to process order update.';
+      let errorMessage = 'Failed to process order update.'
 
       if (error instanceof Error) {
-        errorMessage += ` Error: ${error.message}`;
+        errorMessage += ` Error: ${error.message}`
       } else {
-        errorMessage += ` Unexpected error: ${String(error)}`;
+        errorMessage += ` Unexpected error: ${String(error)}`
       }
 
       this.cartService.addMessage({
         severity: 'error',
         summary: 'Order Update Error',
         detail: errorMessage
-      });
+      })
     }
   }
 
-  ngOnDestroy() {
-    this.alive = false;
-
+  ngOnDestroy (): void {
+    this.alive = false
   }
 }

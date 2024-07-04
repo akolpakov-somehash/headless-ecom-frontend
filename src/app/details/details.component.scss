@@ -15,6 +15,10 @@ $margin-bottom: 15px;
   float: right;
 }
 
+li {
+  list-style-type: none;
+}
+
 .listing-heading {
   font-size: $listing-heading-font-size;
   font-weight: bold;
@@ -25,6 +29,7 @@ $margin-bottom: 15px;
   &::before {
     content: url('/assets/location-pin.svg') / '';
   }
+
   font-size: $listing-location-font-size;
   margin-bottom: $margin-bottom;
 }
@@ -41,10 +46,6 @@ $margin-bottom: 15px;
   li {
     font-size: $listing-features-li-font-size;
   }
-}
-
-li {
-  list-style-type: none;
 }
 
 .listing-apply {

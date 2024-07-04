@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { MenubarComponent } from './menubar/menubar.component';
+import { Component } from '@angular/core'
+import { RouterModule } from '@angular/router'
+import { HomeComponent } from './home/home.component'
+import { MenubarComponent } from './menubar/menubar.component'
 
 @Component({
   selector: 'app-root',
@@ -9,11 +9,10 @@ import { MenubarComponent } from './menubar/menubar.component';
   imports: [
     HomeComponent,
     RouterModule,
-    MenubarComponent,
+    MenubarComponent
   ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'Sample Ecommerce Site';
+  title = 'Sample Ecommerce Site'
 }
