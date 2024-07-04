@@ -11,7 +11,7 @@ import { MenubarComponent } from './menubar/menubar.component'
     RouterModule,
     MenubarComponent
   ],
-  templateUrl: './app.component.html',
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   title = 'Sample Ecommerce Site'

@@ -14,7 +14,7 @@ import { CartService } from '../cart.service'
     DialogModule,
     ButtonModule
   ],
-  templateUrl: './minicart.component.html',
+  templateUrl: './minicart.component.html'
 })
 export class MinicartComponent {
   @Input() products!: ProductQuote[]
