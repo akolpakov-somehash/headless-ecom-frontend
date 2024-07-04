@@ -12,7 +12,6 @@ import { MenubarComponent } from './menubar/menubar.component'
     MenubarComponent
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'Sample Ecommerce Site'
