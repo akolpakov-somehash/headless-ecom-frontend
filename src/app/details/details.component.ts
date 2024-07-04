@@ -6,7 +6,7 @@ import { ProductTile } from '../product-tile'
 import { CardModule } from 'primeng/card'
 
 interface RouteParams {
-  id: string;
+  id: string
 }
 
 @Component({
@@ -25,7 +25,7 @@ export class DetailsComponent {
   productTile: ProductTile | undefined
 
   constructor () {
-    const productId = parseInt((this.route.snapshot.params as RouteParams).id, 10);
+    const productId = parseInt((this.route.snapshot.params as RouteParams).id, 10)
     this.productService.getProductById(productId)
       .then(productTile => {
         this.productTile = productTile

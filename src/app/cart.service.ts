@@ -18,7 +18,7 @@ export class CartService {
 
   // Method to toggle visibility based on current state
   toggleOverlay (): void {
-    this.overlayVisible.next(this.overlayVisible.value === false);
+    this.overlayVisible.next(this.overlayVisible.value === false)
   }
 
   // Method to set specific visibility state

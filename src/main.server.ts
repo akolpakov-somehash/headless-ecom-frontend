@@ -4,7 +4,7 @@ import { config } from './app/app.config.server'
 import { ApplicationRef } from '@angular/core'
 
 const bootstrap = async (): Promise<ApplicationRef> => {
-  return bootstrapApplication(AppComponent, config);
+  return await bootstrapApplication(AppComponent, config)
 }
 
 export default bootstrap
